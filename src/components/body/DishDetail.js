@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
+import DishComments from "./DishComments";
 
 const Dishdetail = (props) => {
   return (
@@ -19,6 +20,7 @@ const Dishdetail = (props) => {
             <p>{props.dish.description}</p>
             <p>{props.dish.price}/-</p>
           </CardText>
+          <DishComments comments={props.dish.comments} />;
         </CardBody>
       </Card>
     </div>
