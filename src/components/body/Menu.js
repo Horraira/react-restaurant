@@ -41,7 +41,7 @@ export default class Menu extends Component {
         <div className="row">
           <CardColumns>{menu}</CardColumns>
           <Modal isOpen={this.state.modalOpen}>
-            <ModalBody>{dishDetail}</ModalBody>
+            <ModalBody onClick={this.toggleModal}>{dishDetail}</ModalBody>
             <ModalFooter>
               <Button onClick={this.toggleModal} color="secondary">
                 Close

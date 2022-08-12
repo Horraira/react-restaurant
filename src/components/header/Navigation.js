@@ -32,7 +32,7 @@ class Navigation extends Component {
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                  <Link to="/" className="nav-link active">
+                  <Link to="/home" className="nav-link active">
                     Home
                   </Link>
                 </NavItem>
