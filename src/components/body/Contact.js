@@ -13,7 +13,26 @@ export default class Contact extends Component {
       contactType: "Tel.",
       message: "",
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleInputChange = (enevt) => {
+    const value =
+      enevt.target.type === "checkbox"
+        ? enevt.target.checked
+        : enevt.target.value;
+    const name = enevt.target.name;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    console.log(this.state);
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div className="container">
@@ -25,7 +44,7 @@ export default class Contact extends Component {
             <h3>Send us your Feedback</h3>
           </div>
           <div className="col-12 col-md-7">
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup row>
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -36,6 +55,7 @@ export default class Contact extends Component {
                     name="firstname"
                     placeholder="First Name"
                     value={this.state.firstname}
+                    onChange={this.handleInputChange}
                   />
                 </Col>
               </FormGroup>
@@ -50,6 +70,7 @@ export default class Contact extends Component {
                     name="lastname"
                     placeholder="Last Name"
                     value={this.state.lastname}
+                    onChange={this.handleInputChange}
                   />
                 </Col>
               </FormGroup>
@@ -64,6 +85,7 @@ export default class Contact extends Component {
                     name="telnum"
                     placeholder="Tel. Number"
                     value={this.state.telnum}
+                    onChange={this.handleInputChange}
                   />
                 </Col>
               </FormGroup>
@@ -78,6 +100,7 @@ export default class Contact extends Component {
                     name="email"
                     placeholder="Email"
                     value={this.state.email}
+                    onChange={this.handleInputChange}
                   />
                 </Col>
               </FormGroup>
@@ -90,6 +113,7 @@ export default class Contact extends Component {
                         type="checkbox"
                         name="agree"
                         checked={this.state.agree}
+                        onChange={this.handleInputChange}
                       />
                       <strong>May we contact you?</strong>
                     </Label>
@@ -100,6 +124,7 @@ export default class Contact extends Component {
                     type="select"
                     name="contactType"
                     value={this.state.contactType}
+                    onChange={this.handleInputChange}
                   >
                     <option>Tel.</option>
                     <option>Email</option>
@@ -116,6 +141,7 @@ export default class Contact extends Component {
                     name="message"
                     value={this.state.message}
                     rows="12"
+                    onChange={this.handleInputChange}
                   ></Input>
                 </Col>
               </FormGroup>
