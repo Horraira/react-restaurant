@@ -1,8 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class Home extends Component {
+const mapStateToProps = (state) => {
+  return {
+    a: state.dishes,
+  };
+};
+
+class Home extends Component {
   render() {
     document.title = "Restrnt";
     return <div></div>;
   }
 }
+
+export default connect(mapStateToProps)(Home);
