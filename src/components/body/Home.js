@@ -1,11 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
-const mapStateToProps = (state) => {
-  return {
-    a: state.dishes,
-  };
-};
 
 class Home extends Component {
   render() {
@@ -14,4 +7,4 @@ class Home extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default Home;

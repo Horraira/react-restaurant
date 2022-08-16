@@ -52,7 +52,7 @@ class Menu extends Component {
         <div className="row">
           <CardColumns>{menu}</CardColumns>
           <Modal isOpen={this.state.modalOpen}>
-            <ModalBody onClick={this.toggleModal}>{dishDetail}</ModalBody>
+            <ModalBody>{dishDetail}</ModalBody>
             <ModalFooter>
               <Button onClick={this.toggleModal} color="secondary">
                 Close
