@@ -1,15 +1,25 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
-import { LocalForm, Control, Errors } from "react-redux-form";
+import { Button, FormGroup, Label, Input, Col } from "reactstrap";
+import { Form, Control, Errors, actions } from "react-redux-form";
+import { connect, Connect } from "react-redux";
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetFeedbackForm: () => {
+      dispatch(actions.reset("feedback"));
+    },
+  };
+};
 
 const required = (val) => val && val.length;
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val);
 
-export default class Contact extends Component {
+class Contact extends Component {
   handleSubmit = (values) => {
     console.log(values);
+    this.props.resetFeedbackForm();
   };
 
   render() {
@@ -24,7 +34,10 @@ export default class Contact extends Component {
             <h3>Send us your Feedback</h3>
           </div>
           <div className="col-12 col-md-7">
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+            <Form
+              model="feedback"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <FormGroup row>
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -185,10 +198,12 @@ export default class Contact extends Component {
                   </Button>
                 </Col>
               </FormGroup>
-            </LocalForm>
+            </Form>
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default connect(null, mapDispatchToProps)(Contact);
