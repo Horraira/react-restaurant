@@ -1,4 +1,3 @@
-import DISHES from "../data/dishes";
 import COMMENTS from "../data/comments";
 import { combineReducers } from "redux";
 import { InitialContactForm } from "./forms";
