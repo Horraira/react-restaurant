@@ -1,6 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { baseUrl } from "./baseUrl";
+import { type } from "@testing-library/user-event/dist/type";
+import { comment } from "fontawesome";
 
 export const addComment = (dishId, rating, author, comment) => ({
   type: actionTypes.ADD_COMMENT,
@@ -11,6 +13,24 @@ export const addComment = (dishId, rating, author, comment) => ({
     comment: comment,
   },
 });
+
+export const commentLoading = () => ({
+  type: actionTypes.COMMENT_LOADING,
+});
+
+export const loadComments = (comments) => ({
+  type: actionTypes.LOAD_COMMENTS,
+  payload: comments,
+});
+
+export const fetchComments = () => (dispatch) => {
+  dispatch(commentLoading());
+
+  axios
+    .get(baseUrl + "comments")
+    .then((response) => response.data)
+    .then((comments) => dispatch(loadComments(comments)));
+};
 
 export const loadDishes = (dishes) => ({
   type: actionTypes.LOAD_DISHES,
