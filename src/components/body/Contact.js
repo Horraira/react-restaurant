@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Button, FormGroup, Label, Input, Col } from "reactstrap";
 import { Form, Control, Errors, actions } from "react-redux-form";
 import { connect, Connect } from "react-redux";
+import axios from "axios";
+import { baseUrl } from "../../redux/baseUrl";
+import { Alert } from "reactstrap";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,8 +20,29 @@ const validEmail = (val) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val);
 
 class Contact extends Component {
+  state = {
+    alertShow: false,
+    alertText: null,
+    alertType: null,
+  };
   handleSubmit = (values) => {
-    console.log(values);
+    axios
+      .post(baseUrl + "feedback", values)
+      .then((response) => response.status)
+      .then((status) => {
+        if (status === 201) {
+          this.setState({
+            alertShow: true,
+            alertType: "success",
+            alertText: "Submitted Successfully",
+          });
+          setTimeout(() => {
+            this.setState({
+              alertShow: false,
+            });
+          }, 2000);
+        }
+      });
     this.props.resetFeedbackForm();
   };
 
@@ -32,6 +56,9 @@ class Contact extends Component {
         >
           <div className="col-12">
             <h3>Send us your Feedback</h3>
+            <Alert isOpen={this.state.alertShow} color={this.state.alertType}>
+              {this.state.alertText}
+            </Alert>
           </div>
           <div className="col-12 col-md-7">
             <Form
