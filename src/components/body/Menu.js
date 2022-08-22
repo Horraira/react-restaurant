@@ -9,6 +9,7 @@ import {
   fetchDishes,
   fetchComments,
 } from "../../redux/actionCreators";
+import { Alert } from "reactstrap";
 
 const mapStateToProps = (state) => {
   return {
@@ -54,6 +55,8 @@ class Menu extends Component {
     document.title = "Menu";
     if (this.props.dishes.isLoading) {
       return <Loading />;
+    } else if (this.props.dishes.errMess != null) {
+      return <Alert color="danger">{this.props.dishes.errMess}</Alert>;
     } else {
       const menu = this.props.dishes.dishes.map((item) => {
         return (

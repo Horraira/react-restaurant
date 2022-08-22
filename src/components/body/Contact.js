@@ -40,8 +40,20 @@ class Contact extends Component {
             this.setState({
               alertShow: false,
             });
-          }, 2000);
+          }, 4000);
         }
+      })
+      .catch((error) => {
+        this.setState({
+          alertShow: true,
+          alertText: error.message,
+          alertType: "danger",
+        });
+        setTimeout(() => {
+          this.setState({
+            alertShow: false,
+          });
+        }, 4000);
       });
     this.props.resetFeedbackForm();
   };
